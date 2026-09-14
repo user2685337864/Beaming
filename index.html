@@ -2417,7 +2417,7 @@
           </div>
           <div class="ann-outer">
             <div class="ann-inner">
-              <img src="/muluck_icon.gif" class="ann-avatar" alt="Muluck7z">
+              <img src="/muluck-avatar.jpg" class="ann-avatar" alt="Muluck7z">
               <div class="ann-body">
                 <div class="ann-nick-row">
                   <span class="ann-nick">Muluck7z</span>
@@ -2564,7 +2564,7 @@
           <ul class="lb-list">
             <li class="lb-item lb-rank-1">
               <div class="lb-avatar-wrap">
-                <div class="lb-avatar" style="background:url('/muluck_icon.gif') center/cover no-repeat;border-style:solid;"></div>
+                <div class="lb-avatar" style="background:url('/muluck-avatar.jpg') center/cover no-repeat;border-style:solid;"></div>
                 <span class="lb-crown lb-crown-1"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 8.5l3.6 2.6L12 4l5.4 7.1L21 8.5 19.3 18H4.7L3 8.5zm4 11h10v1.5H7Link Falso9.5z"/></svg></span>
               </div>
               <span class="lb-name">Muluck7z</span>
@@ -3917,7 +3917,7 @@
               </div>
               <div class="ann-outer">
                 <div class="ann-inner">
-                  <img src="/muluck_icon.gif" class="ann-avatar" alt="Muluck7z">
+                  <img src="/muluck-avatar.jpg" class="ann-avatar" alt="Muluck7z">
                   <div class="ann-body">
                     <div class="ann-nick-row">
                       <span class="ann-nick">Muluck7z</span>
@@ -3973,7 +3973,7 @@
               </div>
               <div class="ann-outer">
                 <div class="ann-inner">
-                  <img src="/muluck_icon.gif" class="ann-avatar" alt="Muluck7z">
+                  <img src="/muluck-avatar.jpg" class="ann-avatar" alt="Muluck7z">
                   <div class="ann-body">
                     <div class="ann-nick-row">
                       <span class="ann-nick">Muluck7z</span>
@@ -4238,7 +4238,7 @@
                 <div class="ann-label"><span class="ann-dot"></span><span class="ann-label-text">Recado</span></div>
                 <div class="ann-outer">
                   <div class="ann-inner">
-                    <img src="/muluck_icon.gif" class="ann-avatar" alt="Muluck7z">
+                    <img src="/muluck-avatar.jpg" class="ann-avatar" alt="Muluck7z">
                     <div class="ann-body"><div class="ann-nick-row"><span class="ann-nick">Muluck7z</span><span class="ann-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ann-tag">Dono</span></div></div>
                     <p class="ann-text">Se alguém utlizar esse método em algum membro da Nexus ou Beamse será punido com banimento permanente.</p>
                   </div>
@@ -4357,32 +4357,17 @@
         if (ctx.state === 'suspended') ctx.resume();
         var now = ctx.currentTime;
         var duration = 0.085;
-        var body = ctx.createOscillator();
-        var bodyGain = ctx.createGain();
-        var shimmer = ctx.createOscillator();
-        var shimmerGain = ctx.createGain();
-
-        body.connect(bodyGain);
-        bodyGain.connect(ctx.destination);
-        shimmer.connect(shimmerGain);
-        shimmerGain.connect(ctx.destination);
-
-        body.type = 'triangle';
-        body.frequency.setValueAtTime(620, now);
-        body.frequency.exponentialRampToValueAtTime(240, now + duration);
-        bodyGain.gain.setValueAtTime(0.075, now);
-        bodyGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-
-        shimmer.type = 'sine';
-        shimmer.frequency.setValueAtTime(1320, now);
-        shimmer.frequency.exponentialRampToValueAtTime(720, now + 0.045);
-        shimmerGain.gain.setValueAtTime(0.025, now);
-        shimmerGain.gain.exponentialRampToValueAtTime(0.001, now + 0.055);
-
-        body.start(now);
-        shimmer.start(now);
-        body.stop(now + duration);
-        shimmer.stop(now + 0.06);
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(620, now);
+        osc.frequency.exponentialRampToValueAtTime(240, now + duration);
+        gain.gain.setValueAtTime(0.075, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+        osc.start(now);
+        osc.stop(now + duration);
       } catch(e) {}
     }
     // ────────────────────────────────────────────────────────────
@@ -4945,12 +4930,7 @@
 
       checkAuth();
 
-      // Vibração no botão de login (touchstart = resposta mais rápida no mobile)
-      document.querySelectorAll('button, a, [role="button"]').forEach(function(el) {
-        el.addEventListener('touchstart', function() {
-          playClick();
-        }, { passive: true });
-      });
+      // O clique nativo cobre mouse e toque; não adicionar touchstart para evitar duplicidade.
 
       if (logoutBtn) {
         logoutBtn.addEventListener('click', function() {
