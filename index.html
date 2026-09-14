@@ -2047,6 +2047,23 @@
             animation: rise 0.6s cubic-bezier(.16,.8,.24,1) both;
         }
 
+        #lw-banner {
+            display: block;
+            width: 100%;
+            height: 112px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.28);
+            border-radius: 16px;
+            object-fit: cover;
+            object-position: center;
+            filter: grayscale(1) contrast(1.08);
+            box-shadow: 0 16px 34px -20px rgba(0,0,0,0.9), 0 0 24px rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 430px) {
+            #lw-banner { height: 96px; }
+        }
+
         #lw-outer {
             background: linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.018));
             border: 1px solid rgba(255,255,255, 0.38);
@@ -2241,16 +2258,20 @@
   </style>
 
   <div id="login-wall">
-    <div id="lw-wrap">
+      <div id="lw-wrap">
 
-      <!-- Card de Login -->
+        <img id="lw-banner"
+          src="/millenium-verification-banner.jpg"
+          alt="Banner da comunidade Millenium">
+
+        <!-- Card de Login -->
       <div id="lw-outer">
         <div id="lw-inner">
 
           <!-- Ícone -->
           <img id="lw-avatar"
-            src="/nexus-icon.jpg"
-            alt="Nexus">
+            src="/millenium-verification-avatar.png"
+            alt="Millenium">
 
           <!-- Info -->
           <div id="lw-body">
