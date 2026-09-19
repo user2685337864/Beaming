@@ -1,7 +1,7 @@
 const { getUser, isAdmin, supabase } = require('../_admin');
 
 const ADMIN_ROLES = {
-  '1503230923980800150': 'Dono',
+  '1545755252836409407': 'Dono',
   '1521369403399213186': 'Sub Dono',
   '1328195818431451186': 'Executivo',
 };

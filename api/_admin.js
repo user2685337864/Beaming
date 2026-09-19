@@ -3,7 +3,7 @@ const { verifyJwt, parseCookies } = require('./_jwt');
 const ADMIN_IDS = new Set([
   '1328195818431451186',
   '1521369403399213186',
-  '1503230923980800150',
+  '1545755252836409407',
 ]);
 
 function getToken(req) {
