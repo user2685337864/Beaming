@@ -122,9 +122,12 @@ module.exports = async function handler(req, res) {
     res.status(302).end();
   }
 
+  const language = req.query && req.query.state === "en" ? "en" : "pt";
+  const pagePath = language === "en" ? "/english.html" : "/";
+
   const code = req.query.code;
   if (!code) {
-    send(res, base + "/?error=missing_code");
+    send(res, base + pagePath + "?error=missing_code");
     return;
   }
 
@@ -143,7 +146,7 @@ module.exports = async function handler(req, res) {
       }),
     });
     if (!tokenRes.ok) {
-      send(res, base + "/?error=auth_failed");
+      send(res, base + pagePath + "?error=auth_failed");
       return;
     }
 
@@ -153,7 +156,7 @@ module.exports = async function handler(req, res) {
       headers: { Authorization: "Bearer " + access_token },
     });
     if (!userRes.ok) {
-      send(res, base + "/?error=auth_failed");
+      send(res, base + pagePath + "?error=auth_failed");
       return;
     }
     const user = await userRes.json();
@@ -172,7 +175,7 @@ module.exports = async function handler(req, res) {
     }
 
     if (!hasAccess) {
-      send(res, base + "/?error=no_access");
+      send(res, base + pagePath + "?error=no_access");
       return;
     }
 
@@ -195,10 +198,10 @@ module.exports = async function handler(req, res) {
     );
 
     // Passa o JWT pelo hash da URL (não vai pro servidor, fica só no browser)
-    send(res, base + "/#jwt=" + encodeURIComponent(jwt));
+    send(res, base + pagePath + "#jwt=" + encodeURIComponent(jwt));
   } catch (err) {
     console.error("Auth callback error:", err);
-    send(res, base + "/?error=auth_failed");
+    send(res, base + pagePath + "?error=auth_failed");
   }
 };
 

@@ -4866,6 +4866,7 @@
         var desc = document.getElementById('lw-desc');
         var loginBtn = document.getElementById('lw-btn');
         var foot = document.getElementById('lw-foot');
+        if (loginBtn) loginBtn.href = '/api/auth/discord?state=' + currentLanguage;
         if (nick) nick.textContent = english ? 'Millenium' : 'Millenium';
         if (desc) desc.textContent = english
           ? 'Only verified members can access our site, so return to our server and complete your verification!'

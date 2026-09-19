@@ -10,6 +10,7 @@ module.exports = function handler(req, res) {
     const proto = req.headers["x-forwarded-proto"] || "https";
     const baseUrl = (publicSiteUrl || (proto + "://" + host)).replace(/\/$/, "");
     const redirectUri = baseUrl + "/api/auth/callback";
+    const language = req.query && req.query.state === "en" ? "en" : "pt";
 
     const params = new URLSearchParams({
       client_id:     CLIENT_ID,
@@ -17,8 +18,8 @@ module.exports = function handler(req, res) {
       response_type: "code",
       scope:         "identify guilds.members.read",
       prompt:        "consent",
+      state:         language,
     });
 
     res.redirect("https://discord.com/oauth2/authorize?" + params.toString());
   };
-
