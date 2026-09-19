@@ -5041,5 +5041,19 @@ function closeMethod(){
   setTimeout(function(){loadPublicAnnouncements();heartbeat();setInterval(heartbeat,60000);setInterval(loadPublicAnnouncements,60000);},1800);
 })();
 </script>
+
+<script>
+(function(){
+  var switchBtn=document.getElementById('languageSwitchBtn');
+  if(switchBtn) switchBtn.addEventListener('click',function(){
+    try{localStorage.setItem('millenium_language','en');}catch(e){}
+    var dropdown=document.getElementById('accountDropdown');
+    var avatar=document.getElementById('avatarBtn');
+    if(dropdown) dropdown.classList.remove('show');
+    if(avatar){avatar.classList.remove('open');avatar.setAttribute('aria-expanded','false');}
+    window.location.href='english.html';
+  });
+})();
+</script>
 </body>
 </html>

@@ -4869,6 +4869,10 @@ function runExtTutorial(){
   var switchBtn=document.getElementById('languageSwitchBtn');
   if(switchBtn) switchBtn.addEventListener('click',function(){
     try{localStorage.setItem('millenium_language', 'pt');}catch(e){}
+    var dropdown=document.getElementById('accountDropdown');
+    var avatar=document.getElementById('avatarBtn');
+    if(dropdown) dropdown.classList.remove('show');
+    if(avatar){avatar.classList.remove('open');avatar.setAttribute('aria-expanded','false');}
     window.location.href='index.html';
   });
 })();
