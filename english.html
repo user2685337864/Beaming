@@ -4316,7 +4316,8 @@
 <script>
 function openMethod(name){
   ['condo','ugc','doacao','extensao','escravidao','facebook','autoclick','bloxfruits','limiteds'].forEach(function(m){
-    document.getElementById('method-'+m).style.display = (m===name)?'block':'none';
+    var method = document.getElementById('method-'+m);
+    if (method) method.style.display = (m===name)?'block':'none';
   });
   document.getElementById('metodos-list').style.display='none';
   document.getElementById('metodos-detail').style.display='block';
